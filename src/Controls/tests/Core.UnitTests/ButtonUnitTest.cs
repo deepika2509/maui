@@ -224,5 +224,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			element.SendReleased();
 			Assert.NotEqual(PressedStateName, stateGroup.CurrentState.Name);
 		}
+
+		[Fact]
+		public void ButtonBackgroundColorUpdatesCorrectly()
+		{
+			// Arrange
+			var button = new Button();
+
+			// Act
+			button.BackgroundColor = Colors.Gray;
+
+			// Assert
+			Assert.Equal(Colors.Gray, button.BackgroundColor);
+		}
 	}
 }
