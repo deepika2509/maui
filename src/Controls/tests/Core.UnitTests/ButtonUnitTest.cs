@@ -1,4 +1,5 @@
 using System;
+using Microsoft.Maui.Graphics;
 using Xunit;
 using static Microsoft.Maui.Controls.Core.UnitTests.VisualStateTestHelpers;
 
@@ -225,17 +226,54 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.NotEqual(PressedStateName, stateGroup.CurrentState.Name);
 		}
 
+
+
+		[Fact]
+		public void TestButtonPaddingUpdates()
+		{
+			var button = new Button();
+
+			button.Padding = new Thickness(10, 20, 10, 20);
+
+			Assert.Equal(new Thickness(10, 20, 10, 20), button.Padding);
+		}
+
+		[Fact]
+		public void TestButtonOpacityUpdates()
+		{
+			var button = new Button();
+
+			button.Opacity = 0.5;
+
+			Assert.Equal(0.5, button.Opacity);
+		}
+
 		[Fact]
 		public void ButtonBackgroundColorUpdatesCorrectly()
 		{
-			// Arrange
 			var button = new Button();
 
-			// Act
 			button.BackgroundColor = Colors.Gray;
 
-			// Assert
 			Assert.Equal(Colors.Gray, button.BackgroundColor);
+		}
+
+		[Fact]
+		public void TestButtonShadowEffect()
+		{
+
+			var button = new Button();
+
+			button.Shadow = new Shadow
+			{
+				Brush = Brush.Black,
+				Offset = new Point(5, 5),
+				Radius = 10
+			};
+
+			Assert.Equal(Brush.Black, button.Shadow.Brush);
+			Assert.Equal(new Point(5, 5), button.Shadow.Offset);
+			Assert.Equal(10, button.Shadow.Radius);
 		}
 	}
 }

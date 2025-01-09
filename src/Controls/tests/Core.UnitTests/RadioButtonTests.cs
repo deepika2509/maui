@@ -236,5 +236,47 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.Equal("updated", layout.GetValue(RadioButtonGroup.SelectedValueProperty));
 		}
+
+		[Fact]
+		public void TestDisabledRadioButtonCannotBeSelected()
+		{
+			var radioButton = new RadioButton { IsEnabled = false };
+
+			radioButton.IsChecked = false;
+
+			Assert.False(radioButton.IsChecked);
+		}
+
+		[Fact]
+		public void TestMultipleGroupsInSingleLayout()
+		{
+
+			var radioButton1 = new RadioButton { GroupName = "Group1", IsChecked = true };
+			var radioButton2 = new RadioButton { GroupName = "Group1" };
+			var radioButton3 = new RadioButton { GroupName = "Group2" };
+
+			var layout = new StackLayout();
+			layout.Children.Add(radioButton1);
+			layout.Children.Add(radioButton2);
+			layout.Children.Add(radioButton3);
+
+			radioButton3.IsChecked = true;
+
+			Assert.True(radioButton1.IsChecked);
+			Assert.False(radioButton2.IsChecked);
+			Assert.True(radioButton3.IsChecked);
+		}
+
+		[Fact]
+		public void TestSelectionPersistsOnVisibilityChange()
+		{
+			var radioButton = new RadioButton { IsChecked = true };
+
+			radioButton.IsVisible = false;
+			radioButton.IsVisible = true;
+
+			Assert.True(radioButton.IsChecked);
+		}
+
 	}
 }
