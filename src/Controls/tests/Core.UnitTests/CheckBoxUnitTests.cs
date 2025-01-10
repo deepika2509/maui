@@ -63,5 +63,43 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			element.IsChecked = false;
 			Assert.NotEqual(checkedStateName, stateGroup.CurrentState.Name);
 		}
+		[Fact]
+		public void TestIsCheckedToggleMultipleTimes()
+		{
+			var checkBox = new CheckBox();
+
+			checkBox.IsChecked = true;
+			Assert.True(checkBox.IsChecked);
+
+			checkBox.IsChecked = false;
+			Assert.False(checkBox.IsChecked);
+
+			checkBox.IsChecked = true;
+			Assert.True(checkBox.IsChecked);
+		}
+
+		[Fact]
+		public void TestStatePersistenceOnVisibilityToggle()
+		{
+			var checkBox = new CheckBox { IsChecked = true };
+
+			checkBox.IsVisible = false;
+			checkBox.IsVisible = true;
+
+			Assert.True(checkBox.IsChecked);
+		}
+
+		[Fact]
+		public void TestUncheckedEventTrigger()
+		{
+			var checkBox = new CheckBox { IsChecked = true };
+			var eventTriggered = false;
+
+			checkBox.CheckedChanged += (sender, e) => eventTriggered = true;
+
+			checkBox.IsChecked = false;
+
+			Assert.True(eventTriggered);
+		}
 	}
 }
