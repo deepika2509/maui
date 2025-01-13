@@ -122,5 +122,40 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.Equal(0, carouselView.Position);
 		}
+
+		[Fact]
+		public void TestPositionResetOnItemsSourceChange()
+		{
+			var source1 = new List<string> { "1", "2", "3" };
+			var source2 = new List<string> { "A", "B", "C" };
+			var carouselView = new CarouselView
+			{
+				ItemsSource = source1
+			};
+
+			carouselView.Position = 1; 
+			Assert.Equal(1, carouselView.Position);
+
+			carouselView.ItemsSource = source2; 
+			Assert.Equal(0, carouselView.Position); 
+		}
+
+		[Fact]
+		public void TestRemoveCurrentItem()
+		{
+			var source = new List<string> { "1", "2", "3" };
+			var carouselView = new CarouselView
+			{
+				ItemsSource = source,
+				CurrentItem = "2"
+			};
+
+			Assert.Equal("2", carouselView.CurrentItem);
+
+			source.Remove("2"); 
+			Assert.NotEqual("2", carouselView.CurrentItem);
+		}
+
+
 	}
 }
