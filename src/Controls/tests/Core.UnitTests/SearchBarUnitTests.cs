@@ -119,5 +119,49 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		protected override SearchBar CreateSource() => new SearchBar();
 
 		protected override void Activate(SearchBar source) => ((ISearchBarController)source).OnSearchButtonPressed();
+
+		[Fact]
+		public void TestCharacterSpacing()
+		{
+			var searchBar = new SearchBar();
+			double characterSpacing = 2.0;
+
+			searchBar.CharacterSpacing = characterSpacing;
+
+			Assert.Equal(characterSpacing, searchBar.CharacterSpacing);
+		}
+
+		[Fact]
+		public void TestHorizontalTextAlignment()
+		{
+			var searchBar = new SearchBar();
+			var alignment = TextAlignment.Center;
+
+			searchBar.HorizontalTextAlignment = alignment;
+
+			Assert.Equal(alignment, searchBar.HorizontalTextAlignment);
+		}
+
+		[Fact]
+		public void TestFontFamily()
+		{
+			var searchBar = new SearchBar();
+			var fontFamily = "CustomFont";
+
+			searchBar.FontFamily = fontFamily;
+
+			Assert.Equal(fontFamily, searchBar.FontFamily);
+		}
+
+		[Fact]
+		public void TestBindingContext()
+		{
+			var searchBar = new SearchBar();
+			var bindingContext = new { SearchTerm = "Sample Query" };
+
+			searchBar.BindingContext = bindingContext;
+
+			Assert.Equal(bindingContext, searchBar.BindingContext);
+		}
 	}
 }
