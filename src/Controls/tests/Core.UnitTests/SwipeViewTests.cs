@@ -413,5 +413,68 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.NotNull(swipeItemView.Content);
 			Assert.NotEmpty(swipeView.LeftItems);
 		}
+
+		[Fact]
+		public void TestSwipeItemsAddAndRemove()
+		{
+			var swipeView = new SwipeView();
+			var swipeItem = new SwipeItem
+			{
+				BackgroundColor = Colors.Blue,
+				Text = "Action"
+			};
+
+			swipeView.LeftItems.Add(swipeItem);
+
+			Assert.Single(swipeView.LeftItems);
+
+			swipeView.LeftItems.Remove(swipeItem);
+			Assert.Empty(swipeView.LeftItems);
+		}
+
+
+		[Fact]
+		public void TestSwipeBehaviorOnInvokedCustomBehavior()
+		{
+			
+			var swipeView = new SwipeView();
+			var swipeItem = new SwipeItem
+			{
+				BackgroundColor = Colors.Green,
+				Text = "Custom"
+			};
+
+			var swipeItems = new SwipeItems
+			{
+				SwipeBehaviorOnInvoked = SwipeBehaviorOnInvoked.Close
+			};
+
+			
+			swipeItems.Add(swipeItem);
+			swipeView.LeftItems = swipeItems;
+
+		
+			Assert.Equal(SwipeBehaviorOnInvoked.Close, swipeView.LeftItems.SwipeBehaviorOnInvoked);
+		}
+
+		[Fact]
+		public void TestSwipeViewItemsCountAfterClear()
+		{
+			var swipeView = new SwipeView();
+
+			swipeView.LeftItems = new SwipeItems
+			{
+				new SwipeItem { Text = "Item 1" },
+				new SwipeItem { Text = "Item 2" }
+			};
+
+			Assert.Equal(2, swipeView.LeftItems.Count);
+
+			swipeView.LeftItems.Clear();
+
+			Assert.Empty(swipeView.LeftItems);
+		}
+
+
 	}
 }
