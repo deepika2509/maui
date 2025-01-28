@@ -135,5 +135,32 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.True(completed);
 		}
+
+		[Fact]
+		public void TestResetToDefaultValues()
+		{
+			var slider = new Slider(20, 200, 100);
+
+			slider.Minimum = 0;
+			slider.Maximum = 1;
+			slider.Value = 0;
+
+			Assert.Equal(0, slider.Minimum);
+			Assert.Equal(1, slider.Maximum);
+			Assert.Equal(0, slider.Value);
+		}
+
+		[Fact]
+		public void TestSetMinimumAndMaximumSimultaneously()
+		{
+			var slider = new Slider(0, 100, 50);
+
+			slider.Maximum = 80;
+			slider.Minimum = 60; 
+
+			Assert.Equal(60, slider.Minimum);
+			Assert.Equal(80, slider.Maximum);
+			Assert.Equal(60, slider.Value);
+		}
 	}
 }
