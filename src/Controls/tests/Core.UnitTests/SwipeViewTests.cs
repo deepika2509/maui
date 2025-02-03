@@ -436,7 +436,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[Fact]
 		public void TestSwipeBehaviorOnInvokedCustomBehavior()
 		{
-			
+
 			var swipeView = new SwipeView();
 			var swipeItem = new SwipeItem
 			{
@@ -449,11 +449,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				SwipeBehaviorOnInvoked = SwipeBehaviorOnInvoked.Close
 			};
 
-			
+
 			swipeItems.Add(swipeItem);
 			swipeView.LeftItems = swipeItems;
 
-		
+
 			Assert.Equal(SwipeBehaviorOnInvoked.Close, swipeView.LeftItems.SwipeBehaviorOnInvoked);
 		}
 
